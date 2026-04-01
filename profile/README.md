@@ -267,7 +267,6 @@ We are building StatsClaw in the open. Everyone is welcome.
 | | |
 |:--|:--|
 | **Share an idea** | [Discussions](https://github.com/statsclaw/statsclaw/discussions/categories/ideas) |
-| **Submit a paper** to turn into a package | [Paper-to-Package request](https://github.com/statsclaw/statsclaw/issues/new?template=paper-to-package.yml) |
 | **Report a bug** | [Bug report](https://github.com/statsclaw/statsclaw/issues/new?template=bug-report.yml) |
 | **Contribute code** | [Contributing guide](https://github.com/statsclaw/statsclaw/blob/main/CONTRIBUTING.md) |
 | **See what is planned** | [Roadmap](https://github.com/statsclaw/statsclaw/blob/main/ROADMAP.md) |
