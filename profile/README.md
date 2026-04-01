@@ -2,9 +2,9 @@
 
 # StatsClaw
 
-### Paper in, package out.
+### A workflow framework for statistical package development.
 
-**An open-source framework that turns statistical papers, formulas, and conversations into production-ready packages.**
+**An open-source tool that helps researchers build, test, and document statistical software packages with AI agent teams.**
 
 [Website](https://statsclaw.ai) · [Roadmap](https://github.com/statsclaw/statsclaw/blob/main/ROADMAP.md) · [Contributing](https://github.com/statsclaw/statsclaw/blob/main/CONTRIBUTING.md) · [Discussions](https://github.com/statsclaw/statsclaw/discussions)
 
@@ -14,7 +14,7 @@
 
 ## What is StatsClaw?
 
-StatsClaw is a framework for [Claude Code](https://claude.ai/code) that uses **AI agent teams** to automate statistical package development. You describe a method — through a paper, a conversation, or a set of formulas — and StatsClaw builds, tests, documents, and ships the package for you.
+StatsClaw is a framework for [Claude Code](https://claude.ai/code) that uses **AI agent teams** to assist with statistical package development. You describe what you need — a bug fix, a new feature, a cross-language translation — and StatsClaw coordinates multiple AI agents to help you build, test, and document the result. It works best when a domain expert stays in the loop to guide decisions.
 
 ## How It Works
 
@@ -68,19 +68,19 @@ Just tell StatsClaw what you want. It auto-detects the language, selects the rig
 work on https://github.com/your-org/your-package resolve the issues
 ```
 
-That's it. You'll be asked targeted clarification questions when the system encounters genuine ambiguity — answer with domain expertise, and StatsClaw handles all the engineering.
+StatsClaw will auto-detect the language, select a workflow, and start working. It will ask you clarification questions when it encounters ambiguity — your domain expertise guides the process. Results vary depending on task complexity; expect to iterate.
 
 ---
 
 ## Learn by Example
 
-We provide three complete, real-world examples that demonstrate the full range of StatsClaw's capabilities. Each example is a real repository you can inspect, clone, and learn from.
+We provide three examples from our own usage. Each is a real repository you can inspect and learn from. Your mileage may vary — these represent what worked for us with active researcher involvement.
 
-### Example 1: Resolving Issues in an Existing Package (1→10)
+### Example 1: Iterative Refactoring of an Existing Package (1→2)
 
 > **Repo:** [`statsclaw/example-fect`](https://github.com/statsclaw/example-fect)
 >
-> **What it demonstrates:** Sustained, multi-day refactoring of an R package for causal panel data
+> **What it demonstrates:** Multi-day, researcher-guided refactoring of an R package for causal panel data
 
 <details>
 <summary><b>The Task</b></summary>
@@ -97,18 +97,16 @@ and document any related files to my workspace
 <details>
 <summary><b>What Happened</b></summary>
 
-Over **5 days and ~20 workflow runs**, StatsClaw:
+Over **5 days and ~20 workflow runs**, with ~10 substantive researcher interactions guiding the process, StatsClaw helped:
 
-- Grew the test suite from **131 to 590 tests** (4.5x increase, 100% pass rate)
-- Made **33+ commits** on the `cfe` branch
-- Caught **11+ genuine bugs** through adversarial BLOCK signals
-- Discovered a **balanced-panel algebraic degeneracy** nobody anticipated — where two-way demeaning absorbs group structure on balanced panels, making extra FEs a no-op
-- Improved C++ EM convergence by **43–2,249x** through component-wise monitoring
-- Produced a **12-chapter Quarto book** with DGPs and companion scripts
-- Generated **28 CHANGELOG entries** across three version milestones
-- Ended with **zero known bugs**
+- Grow the test suite from **131 to 590 tests** (100% pass rate)
+- Make **33+ commits** on the `cfe` branch
+- Catch **11+ bugs** through adversarial BLOCK signals — several would have been hard to find manually
+- Surface a **balanced-panel algebraic degeneracy** through behavioral testing
+- Improve C++ EM convergence accuracy through component-wise monitoring
+- Produce a **12-chapter Quarto book** with DGPs and companion scripts
 
-The user provided ~10 substantive interactions — all domain decisions like "use `interaction(region, time)` instead of simple region FE" and "reduce treatment effect to tau=1 for realism."
+The researcher's domain decisions (e.g., "use `interaction(region, time)`", "reduce tau to 1") were essential — the system could not have made these calls on its own.
 </details>
 
 <details>
@@ -127,12 +125,12 @@ The user provided ~10 substantive interactions — all domain decisions like "us
 
 > **Repo:** [`statsclaw/example-R2PY`](https://github.com/statsclaw/example-R2PY)
 >
-> **What it demonstrates:** Greenfield construction of a complete Python package from an R reference implementation
+> **What it demonstrates:** Building a Python package from an R reference, with researcher review at each stage
 
 <details>
 <summary><b>The Task</b></summary>
 
-Build a Python equivalent of the `interflex` R package for conditional marginal effect estimation — from zero lines of Python code to a shipped, validated product. No formal math document provided; the R source is the only specification.
+Build a Python equivalent of the `interflex` R package for conditional marginal effect estimation, starting from zero Python code. No formal math document provided; the R source is the only specification. Required 3 rounds of researcher feedback to get right.
 
 **Prompt:**
 ```
@@ -164,7 +162,7 @@ In **3 iterative rounds** with ~150 words of user input:
   - Bootstrap inference silently fell through to delta method (`elif vartype == "bootstrap": pass`)
   - HC1 sandwich operator precedence (NumPy `*` binds before `@`)
 
-**Final product:** 14 modules, ~3,500 lines, 5 estimators, 3 inference methods, 4 covariance estimators, 5 GLM links, 34 tests, 10-chapter Quarto book
+**Final product:** 14 modules, ~3,500 lines, 34 tests, 10-chapter Quarto book. The audit step was critical — without it, 2 silent bugs would have shipped.
 </details>
 
 <details>
@@ -182,7 +180,7 @@ In **3 iterative rounds** with ~150 words of user input:
 
 > **Repo:** [`statsclaw/example-probit`](https://github.com/statsclaw/example-probit)
 >
-> **What it demonstrates:** PDF manuscript → R/C++ package + Monte Carlo simulation study (three-pipeline architecture)
+> **What it demonstrates:** PDF manuscript → R/C++ package + Monte Carlo simulation (three-pipeline architecture)
 
 <details>
 <summary><b>The Task</b></summary>
@@ -224,22 +222,21 @@ The Simulator treated the estimator as a **black box** — calling the implement
 - **Three-pipeline architecture:** Code, test, and simulation pipelines all isolated — a bug must fool all three
 - **C++ integration:** Rcpp/Armadillo compilation, export attributes, numerical stability (overflow in Phi, Mills ratio near tails)
 - **Monte Carlo as verification:** Simulation results independently confirm theoretical properties (unbiasedness, coverage, efficiency)
-- **Single-prompt delivery:** Complete package + tests + simulation + documentation from one prompt
+- **Reduced manual effort:** Much of the boilerplate (Rcpp setup, simulation harness, documentation) was handled by the agents
 </details>
 
 ---
 
-## What Can StatsClaw Do?
+## What Can StatsClaw Help With?
 
-| Capability | Description | Example |
-|:-----------|:------------|:--------|
-| **Paper to Package** | PDF/LaTeX equations → production code | Probit methods from manuscript |
-| **Cross-Language Translation** | R→Python, Python→R with numerical equivalence | interflex R→Python |
-| **Package Refactoring** | Multi-day campaigns with cross-session continuity | fect 5-day refactoring |
-| **Monte Carlo Evaluation** | Design and run simulation studies comparing methods | Probit bias/RMSE/coverage study |
-| **Issue Resolution** | Fix bugs with adversarial verification | `fix issue #42 in my-package` |
-| **Documentation** | Quarto books, API docs, architecture diagrams | 10–12 chapter tutorials |
-| **Bug Discovery** | Find bugs that pass tests through independent verification | 6 bugs in passing code (interflex) |
+| Task | How it helps | Limitations |
+|:-----|:-------------|:------------|
+| **Implementing methods** | Assists with translating specs into code | Requires researcher to validate mathematical correctness |
+| **Cross-language translation** | Handles R↔Python idiom differences | May miss subtle numerical edge cases without careful review |
+| **Testing & validation** | Independent test pipeline catches bugs tests miss | Empirical verification, not formal proofs |
+| **Monte Carlo studies** | Automates simulation harness and reporting | Researcher must design meaningful DGPs and metrics |
+| **Bug fixing** | Adversarial architecture helps find hidden bugs | Complex domain bugs still need human insight |
+| **Documentation** | Generates Quarto books, API docs | Needs researcher review for accuracy |
 
 ## Example Prompts
 
@@ -281,6 +278,6 @@ We are building StatsClaw in the open. Everyone is welcome.
 
 **[statsclaw.ai](https://statsclaw.ai)**
 
-*Built for statisticians and econometricians who want their methods to reach the world.*
+*A tool for statisticians and econometricians. Works best with an expert in the loop.*
 
 </div>
