@@ -185,7 +185,7 @@ In **3 iterative rounds** with ~150 words of user input:
 <details>
 <summary><b>The Task</b></summary>
 
-Implement three probit estimation methods from a PDF manuscript in C++ via Rcpp/Armadillo, then run a comprehensive Monte Carlo study comparing all three.
+Implement three probit estimation methods from a [4-page PDF specification](https://github.com/statsclaw/example-probit/blob/main/probit_spec.pdf) in C++ via Rcpp/Armadillo, then run a comprehensive Monte Carlo study comparing all three.
 
 **Prompt:**
 ```
