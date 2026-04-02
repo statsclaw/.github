@@ -227,6 +227,56 @@ The Simulator treated the estimator as a **black box** — calling the implement
 
 ---
 
+### Example 4: Paper-Driven Feature Addition (Paper→Feature)
+
+> **Repo:** [`statsclaw/example-panelView`](https://github.com/statsclaw/example-panelView)
+>
+> **What it demonstrates:** Reading a methodology paper (Correia 2016) to design a new feature, with prerequisite refactoring
+
+<details>
+<summary><b>The Task</b></summary>
+
+Add a `type = "network"` visualization to the `panelView` R package: build a bipartite graph from the panel's observation matrix (units × time periods), highlight singletons (degree-1 nodes), draw convex hulls around connected components, and support k-partite graphs for multi-way FE. Based on Figure 2 of Correia (2016).
+
+**Prompt:**
+```
+Read this paper: Correia (2016), "A Feasible Estimator for Linear Models
+with Multi-Way Fixed Effects". I want panelView to make figures like
+Figure 2 and identify degree-1 nodes (singletons). Add type = "network":
+build a bipartite graph from the panel's observation matrix. Units and
+time periods as differently shaped/colored nodes, edges = "unit observed
+in period". Highlight singletons, draw convex hulls around connected
+components. Support 2+ sets of fixed effects (k-partite). igraph in
+Suggests, not Imports. Plan first.
+```
+</details>
+
+<details>
+<summary><b>What Happened</b></summary>
+
+The **Planner** comprehended Correia (2016) and identified that the existing codebase — a monolithic 37KB file — needed refactoring before a new feature could be safely added. StatsClaw made the judgment to **refactor first**:
+
+1. **Refactored monolith** → 4 focused modules (`plot-treat.R`, `plot-outcome.R`, `plot-bivariate.R`, + dispatch core)
+2. **Added test suite** covering all plot types, sub-modes, both formula and explicit-variable interfaces
+3. **Fixed 3 ggplot2 deprecation bugs** (`size` → `linewidth`, unsafe `class()` checks)
+4. **Replaced stale vignette** with 5-chapter Quarto manual
+5. **Added ARCHITECTURE.md** (13.9 KB) documenting dispatch architecture and 8-stage data pipeline
+6. **CRAN prep**: zero errors, zero warnings in `R CMD check`, version bumped to v1.2.1
+7. **Produced specs** for the `type = "network"` feature as a clean new module
+
+</details>
+
+<details>
+<summary><b>Key StatsClaw Features Demonstrated</b></summary>
+
+- **Paper comprehension → feature design:** The Planner read a methodology paper not to implement the estimator, but to extract a *visualization concept* from its exposition
+- **Proactive refactor-first judgment:** The system identified refactoring as a prerequisite before the user asked for it
+- **Test coverage from zero:** Added tests for a package that previously had none
+- **CRAN compliance:** Handled warnings, DESCRIPTION fields, stale vignettes systematically
+</details>
+
+---
+
 ## What Can StatsClaw Help With?
 
 | Task | How it helps | Limitations |
@@ -235,6 +285,7 @@ The Simulator treated the estimator as a **black box** — calling the implement
 | **Cross-language translation** | Handles R↔Python idiom differences | May miss subtle numerical edge cases without careful review |
 | **Testing & validation** | Independent test pipeline catches bugs tests miss | Empirical verification, not formal proofs |
 | **Monte Carlo studies** | Automates simulation harness and reporting | Researcher must design meaningful DGPs and metrics |
+| **Paper-driven features** | Reads methodology papers to design new functionality | Extracts concepts, not full estimator implementations |
 | **Bug fixing** | Adversarial architecture helps find hidden bugs | Complex domain bugs still need human insight |
 | **Documentation** | Generates Quarto books, API docs | Needs researcher review for accuracy |
 
@@ -255,6 +306,9 @@ run a Monte Carlo study comparing these three estimators
 
 # Paper to package
 build the R works from this PDF
+
+# Paper-driven feature
+read Correia (2016) and add network visualization to panelView
 
 # Documentation
 update the documentation for v2.0
