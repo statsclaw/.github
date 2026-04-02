@@ -277,6 +277,19 @@ The **Planner** comprehended Correia (2016) and identified that the existing cod
 
 ---
 
+### What Does the Workspace Look Like?
+
+> **Repo:** [`statsclaw/example-workspace`](https://github.com/statsclaw/example-workspace)
+
+Every StatsClaw run automatically generates structured process records — comprehension artifacts, dual specifications, audit trails, run logs, and handoff documents. These are synced to a dedicated **workspace repository**, keeping your target repos clean. See `example-workspace` for the actual artifacts produced during all four examples above, including:
+
+- `comprehension.md` — auditable evidence the system understood your methodology before writing code
+- `spec.md` / `test-spec.md` / `sim-spec.md` — independent specifications (Builder, Tester, Simulator never see each other's)
+- `review.md` — cross-pipeline convergence audit with per-test results
+- `HANDOFF.md` — cross-session continuity (each new session picks up where the last left off)
+
+---
+
 ## What Can StatsClaw Help With?
 
 | Task | How it helps | Limitations |
