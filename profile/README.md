@@ -348,6 +348,9 @@ update the documentation for v2.0
 
 # Enable shared knowledge
 enable brain
+
+# Share what you learned
+/contribute
 ```
 
 ## Get Involved
@@ -357,7 +360,7 @@ We are building StatsClaw in the open. Everyone is welcome.
 - **Share an idea** — [Discussions](https://github.com/statsclaw/statsclaw/discussions/categories/ideas)
 - **Report a bug** — [Bug report](https://github.com/statsclaw/statsclaw/issues/new?template=bug-report.yml)
 - **Contribute code** — [Contributing guide](https://github.com/statsclaw/statsclaw/blob/main/CONTRIBUTING.md)
-- **Contribute knowledge** — Enable Brain mode and your discoveries help everyone. [Learn more](https://github.com/statsclaw/statsclaw/blob/main/.github/BRAIN.md)
+- **Contribute knowledge** — Enable Brain mode and your discoveries help everyone. Use `/contribute` to share lessons learned. [Learn more](https://github.com/statsclaw/statsclaw/blob/main/.github/BRAIN.md)
 - **See what is planned** — [Roadmap](https://github.com/statsclaw/statsclaw/blob/main/ROADMAP.md)
 
 ---
