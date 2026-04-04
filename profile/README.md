@@ -353,6 +353,25 @@ enable brain
 /contribute
 ```
 
+## Citation
+
+If you use StatsClaw in your research or software development, please cite:
+
+> Qin, Tianzhu and Yiqing Xu. 2025. "[StatsClaw: An AI-Collaboration Workflow for Statistical Software Development](https://bit.ly/statsclaw)."
+
+```bibtex
+@article{qinxu2025statsclaw,
+  title={StatsClaw: An AI-Collaboration Workflow for Statistical Software Development},
+  author={Qin, Tianzhu and Xu, Yiqing},
+  year={2025},
+  url={https://bit.ly/statsclaw}
+}
+```
+
+## License
+
+The StatsClaw framework is released under the [MIT License](https://github.com/statsclaw/statsclaw/blob/main/LICENSE). Brain knowledge entries are shared under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+
 ## Get Involved
 
 We are building StatsClaw in the open. Everyone is welcome.
