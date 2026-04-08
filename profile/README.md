@@ -357,15 +357,18 @@ enable brain
 
 If you use StatsClaw in your research or software development, please cite:
 
-> Qin, Tianzhu and Yiqing Xu. 2026. "[StatsClaw: An AI-Collaborative Workflow for Statistical Software Development](https://bit.ly/statsclaw)."
+> Qin, Tianzhu and Yiqing Xu. 2026. "[StatsClaw: An AI-Collaborative Workflow for Statistical Software Development](https://arxiv.org/abs/2604.04871)." arXiv preprint arXiv:2604.04871.
 
 ```bibtex
-@misc{qinxu2026statsclaw,
+@article{qinxu2026statsclaw,
   title={StatsClaw: An AI-Collaborative Workflow for Statistical Software Development},
   author={Qin, Tianzhu and Xu, Yiqing},
   year={2026},
-  howpublished = {Mimeo, Stanford University},
-  url={https://bit.ly/statsclaw}
+  eprint={2604.04871},
+  archivePrefix={arXiv},
+  primaryClass={cs.SE},
+  doi={10.48550/arXiv.2604.04871},
+  url={https://arxiv.org/abs/2604.04871}
 }
 ```
 
