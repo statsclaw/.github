@@ -63,23 +63,31 @@ More languages coming — [Julia is next](https://github.com/statsclaw/statsclaw
 
 ### Install as Plugin (Recommended)
 
-If you already have Claude Code, install StatsClaw as a plugin — no cloning needed:
+Install once, use everywhere. Open **your own project** and start working:
 
 ```bash
+cd ~/my-project
+claude
+
+# Inside Claude Code:
 /plugin marketplace add statsclaw/statsclaw
 /plugin install statsclaw@statsclaw
 ```
 
-After installation, open any project and the leader agent activates automatically. You can also browse and install from the [Claude Plugin Directory](https://claude.com/plugins).
+After installation, the leader agent activates automatically in any project. Also available in the [Claude Plugin Directory](https://claude.com/plugins).
 
 ### Clone the Repo (Alternative)
 
-For development or contributing to the framework itself:
+Clone **statsclaw/statsclaw**, run Claude Code inside it, then point it at your target repo:
 
 ```bash
 git clone https://github.com/statsclaw/statsclaw.git
 cd statsclaw && claude
 ```
+
+Then inside Claude Code, say `work on <your-repo-url>`.
+
+Also works with Claude Desktop App (open the cloned `statsclaw` folder) or your IDE (open folder, run `claude` in terminal).
 
 ### Your First Task
 
@@ -92,7 +100,6 @@ work on https://github.com/your-org/your-package resolve the issues
 StatsClaw will auto-detect the language, select a workflow, and start working. It will ask you clarification questions when it encounters ambiguity — your domain expertise guides the process. Results vary depending on task complexity; expect to iterate.
 
 ---
-
 ## Learn by Example
 
 We provide three examples from our own usage. Each is a real repository you can inspect and learn from. Your mileage may vary — these represent what worked for us with active researcher involvement.
