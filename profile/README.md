@@ -63,18 +63,26 @@ More languages coming — [Julia is next](https://github.com/statsclaw/statsclaw
 
 ### Install as Plugin (Recommended)
 
-Install once, use everywhere. Open **your own project** and start working:
+Install StatsClaw as a plugin so the leader agent takes over when you're working on your statistical package:
 
 ```bash
-cd ~/my-project
+cd ~/my-r-package
 claude
 
 # Inside Claude Code:
 /plugin marketplace add statsclaw/statsclaw
-/plugin install statsclaw@statsclaw
+/plugin install statsclaw@statsclaw --scope project
 ```
 
-After installation, the leader agent activates automatically in any project. Also available in the [Claude Plugin Directory](https://claude.com/plugins).
+**Scope recommendation**: Use `--scope project` so StatsClaw only activates inside this specific package. If you install at the default `user` scope, the leader agent takes over **every** Claude Code session across all projects, which may be too intrusive if you also use Claude Code for non-StatsClaw work (normal coding, debugging, etc.).
+
+| Scope | When to use |
+|:------|:------------|
+| `--scope project` | Recommended. Activates StatsClaw only in this package (shared with collaborators via `.claude/settings.json`) |
+| `--scope local` | Same as project but local to your machine only (not committed) |
+| `--scope user` (default) | Activates StatsClaw in every Claude Code session across all projects |
+
+To temporarily disable without uninstalling: `/plugin disable statsclaw@statsclaw`. Also available in the [Claude Plugin Directory](https://claude.com/plugins).
 
 ### Clone the Repo (Alternative)
 
