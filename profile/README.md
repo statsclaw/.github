@@ -403,7 +403,8 @@ If you use StatsClaw in your research or software development, please cite:
   archivePrefix={arXiv},
   primaryClass={cs.SE},
   doi={10.48550/arXiv.2604.04871},
-  url={https://arxiv.org/abs/2604.04871}
+  url={https://arxiv.org/abs/2604.04871},
+  note={arXiv:2604.04871 [cs.SE]}
 }
 ```
 
