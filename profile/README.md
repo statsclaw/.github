@@ -14,7 +14,16 @@
 
 ## What is StatsClaw?
 
-StatsClaw is a framework for [Claude Code](https://claude.ai/code) that uses **AI agent teams** to assist with statistical package development. You describe what you need — a bug fix, a new feature, a cross-language translation — and StatsClaw coordinates multiple AI agents to help you build, test, and document the result. It works best when a domain expert stays in the loop to guide decisions.
+StatsClaw is a framework that uses **AI agent teams** to assist with statistical package development. You describe what you need — a bug fix, a new feature, a cross-language translation — and StatsClaw coordinates multiple AI agents to help you build, test, and document the result. It works best when a domain expert stays in the loop to guide decisions.
+
+StatsClaw ships in two interchangeable runtimes — pick whichever coding CLI you already use:
+
+| Runtime | Repo | For users of |
+|:--|:--|:--|
+| **Claude Code** (original) | [`statsclaw/statsclaw`](https://github.com/statsclaw/statsclaw) | Anthropic's [Claude Code](https://claude.ai/code) |
+| **Codex CLI** (port) | [`statsclaw/statsclaw-codex`](https://github.com/statsclaw/statsclaw-codex) | OpenAI's [Codex CLI](https://github.com/openai/codex) |
+
+Both runtimes implement the same 9-agent protocol, the same three-pipeline adversarial verification, and the same shared brain — a contribution from a Codex user benefits Claude Code users and vice-versa.
 
 ## How It Works
 
@@ -57,11 +66,11 @@ More languages coming — [Julia is next](https://github.com/statsclaw/statsclaw
 
 ### Prerequisites
 
-1. **Claude Code** — [Install Claude Code](https://claude.ai/code)
+1. **A coding CLI** — either [Claude Code](https://claude.ai/code) or [OpenAI Codex CLI](https://github.com/openai/codex)
 2. **GitHub access** — Push access to your target repository
 3. **Workspace repo** — A GitHub repo for storing workflow artifacts (auto-created if needed)
 
-### Install as Plugin (Recommended)
+### Option 1 — Claude Code (Install as Plugin, Recommended)
 
 Install StatsClaw as a plugin so the leader agent takes over when you're working on your statistical package:
 
@@ -84,7 +93,35 @@ claude
 
 To temporarily disable without uninstalling: `/plugin disable statsclaw@statsclaw`. Also available in the [Claude Plugin Directory](https://claude.com/plugins).
 
-### Clone the Repo (Alternative)
+### Option 2 — Codex CLI (One-liner)
+
+Prefer OpenAI's Codex CLI? StatsClaw is ported verbatim — same 9 agents, same three-pipeline architecture, same brain. See [`statsclaw/statsclaw-codex`](https://github.com/statsclaw/statsclaw-codex).
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/statsclaw/statsclaw-codex/main/install-remote.sh | bash
+```
+
+Then in a **new** terminal:
+
+```bash
+codex
+```
+
+And inside Codex:
+
+```
+/plugins
+install statsclaw
+```
+
+Two-step install (if you don't like `curl | bash`):
+
+```bash
+git clone https://github.com/statsclaw/statsclaw-codex ~/.codex/plugins/statsclaw
+bash ~/.codex/plugins/statsclaw/install.sh
+```
+
+### Option 3 — Clone the Repo (Alternative)
 
 Clone **statsclaw/statsclaw**, run Claude Code inside it, then point it at your target repo:
 
